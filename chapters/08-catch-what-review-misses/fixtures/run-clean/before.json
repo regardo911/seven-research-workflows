@@ -1,0 +1,47 @@
+{
+  "source": "../../05-reconcile-your-cleaning/fixtures/cohort_2_v3.csv",
+  "n_rows": 96,
+  "columns": [
+    "sample_id",
+    "condition",
+    "batch",
+    "rin_score",
+    "patient_id",
+    "collect_date",
+    "age",
+    "timepoint"
+  ],
+  "dtypes": {
+    "sample_id": "str",
+    "condition": "str",
+    "batch": "str",
+    "rin_score": "str",
+    "patient_id": "str",
+    "collect_date": "str",
+    "age": "str",
+    "timepoint": "str"
+  },
+  "n_missing": {
+    "sample_id": 0,
+    "condition": 0,
+    "batch": 0,
+    "rin_score": 4,
+    "patient_id": 0,
+    "collect_date": 0,
+    "age": 0,
+    "timepoint": 2
+  },
+  "n_unique_ids": 96,
+  "id_sample": [
+    "POS_CTRL_1",
+    "POS_CTRL_2",
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S005",
+    "S006",
+    "S007",
+    "S008"
+  ]
+}

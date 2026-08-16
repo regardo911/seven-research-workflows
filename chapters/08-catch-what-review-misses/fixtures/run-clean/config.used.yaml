@@ -1,0 +1,26 @@
+run:
+  name: cohort2_de_v3
+  note: "shipped run directory; every rubric row has something real to read"
+
+paths:
+  counts:            ../../05-reconcile-your-cleaning/fixtures/cohort2_counts.tsv
+  samplesheet:       ../../05-reconcile-your-cleaning/fixtures/cohort_2_v3.csv
+  outdir:            run-clean
+  draft:             draft.md
+  sample_to_patient: data/sample_to_patient.tsv
+  sample_to_site:    data/sample_to_site.tsv
+
+design:
+  condition_column: condition
+  reference_level:  ctrl
+  contrast:         "treat vs ctrl"
+  covariates:       [batch]
+  controls:         [POS_CTRL_1, POS_CTRL_2]
+
+thresholds:
+  min_count_per_gene:   10
+  min_samples_expressed: 3
+  padj_cutoff:          0.05
+  lfc_cutoff:           1.0
+
+seed: 42

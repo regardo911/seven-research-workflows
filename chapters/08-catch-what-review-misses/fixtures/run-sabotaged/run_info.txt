@@ -1,0 +1,4 @@
+run:    cohort2_de_v3b
+note:   shipped run directory; run verify.sh against it and read the output
+host:   fixture
+git:    not a git repo

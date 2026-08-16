@@ -1,0 +1,26 @@
+# Snakemake's cache, created by any dry run
+.snakemake/
+
+# Run directories. Nothing in runs/ is ever edited, and nothing in it is ever
+# committed either: a run belongs to the machine that produced it.
+runs/
+
+# The before-state, when it lands in the working directory rather than the run
+# directory. See chapters/05-reconcile-your-cleaning.
+before.json
+
+# ...but NOT the two shipped fixture run directories. row 4 reads before.json, and
+# row 4 is the row that catches the deleted drop-log line. ignore those and the
+# sabotaged fixture stops failing, which makes the whole demo a no-op on a clone.
+!chapters/*/fixtures/*/before.json
+
+# The lockfile you generate. It pins YOUR platforms, not somebody else's, and the
+# only honest conda-lock.yml is the one your own conda-lock command wrote.
+conda-lock.yml
+conda-*.lock
+
+.env
+.env.*
+__pycache__/
+*.pyc
+.DS_Store

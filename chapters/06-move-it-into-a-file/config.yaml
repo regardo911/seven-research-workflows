@@ -1,0 +1,28 @@
+# Chapter 6. Printed in full in the chapter; this copy is verbatim.
+# Anything that changes between runs lives here. Anything that does not lives
+# in the script.
+# config.yaml
+run:
+  name: cohort2_de_v3
+  note: "rerun after fixing whitespace in sample_id; batch now included in design"
+
+paths:
+  counts:      data/cohort2_counts.tsv
+  samplesheet: data/cohort2_samplesheet.csv
+  annotation:  ref/gencode_v44_genes.tsv
+  outdir:      runs/cohort2_de_v3
+
+design:
+  condition_column: condition
+  reference_level:  control
+  contrast:         "treated vs control"
+  covariates:       [batch]
+  controls:         [POS_CTRL_1, POS_CTRL_2]
+
+thresholds:
+  min_count_per_gene:   10
+  min_samples_expressed: 3
+  padj_cutoff:          0.05
+  lfc_cutoff:           1.0
+
+seed: 42

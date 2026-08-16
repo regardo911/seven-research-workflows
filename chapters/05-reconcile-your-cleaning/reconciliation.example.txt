@@ -1,0 +1,36 @@
+INTEGRITY RECONCILIATION — cohort_2 metadata + counts
+
+ROWS
+  in                 96
+  out                91
+  logged removals     5
+  reconciles?        YES  (91 + 5 = 96)
+
+DROP LOG
+  filter                 threshold      n   per group (ctrl/treat)   example ids
+  id_not_in_countmatrix  exact match    5   3 / 2                    S014, S037, S058, S061, S077
+                         -> cause: trailing whitespace in sample_id, source file cohort_2_v3.csv
+
+DTYPES CHANGED
+  patient_id     str -> int64     *** FLAGGED — leading zeros lost, 12 IDs affected
+  collect_date   str -> datetime  ok, intended
+  batch          str -> str       unchanged
+
+MISSINGNESS
+  rin_score      4 -> 4     unchanged
+  age            0 -> 0     unchanged
+  timepoint      2 -> 0     *** FLAGGED — 2 NAs became values, no filter logged this
+
+SPOT CHECK (5 records carried by ID)
+  S002  ctrl  batch A  rin 8.1   matches source  OK
+  S019  ctrl  batch A  rin 7.4   matches source  OK
+  S044  treat batch B  rin 8.8   matches source  OK
+  S070  treat batch B  rin 6.9   matches source  OK
+  S088  treat batch B  rin 7.7   matches source  OK
+
+PER-GROUP BALANCE
+  removals ctrl 3 / 45   (6.7%)
+  removals treat 2 / 51  (3.9%)
+  -> not concentrated; proceed
+
+VERDICT: FAIL — 2 flagged items must be resolved before analysis

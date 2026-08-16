@@ -1,0 +1,4 @@
+run:    cohort2_de_v3
+note:   shipped run directory; every rubric row has something real to read
+host:   fixture
+git:    not a git repo

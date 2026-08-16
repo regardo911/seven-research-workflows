@@ -1,0 +1,15 @@
+# Chapter 7, transcribed verbatim. Written by hand, never exported. This is what
+# you asked for; conda-lock.yml is what you got, and you generate that yourself.
+name: cohort2-analysis
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pandas
+  - r-base=4.3
+  - bioconductor-deseq2
+  - bioconductor-clusterprofiler
+  - bioconductor-enrichplot
+  - r-yaml
+  - snakemake-minimal

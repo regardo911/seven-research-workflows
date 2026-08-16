@@ -1,0 +1,63 @@
+# Chapter 7, transcribed verbatim: five rules, and none of them says what order to
+# run in. environment.yml and scripts/ sit beside this file because Snakemake
+# resolves conda: and script: relative to the Snakefile. See the README.
+configfile: "config.yaml"
+
+OUT = config["paths"]["outdir"]
+
+rule all:
+    input:
+        f"{OUT}/enrichment_dotplot.pdf",
+        f"{OUT}/de_results.tsv"
+
+rule clean:
+    input:
+        counts = config["paths"]["counts"],
+        sheet  = config["paths"]["samplesheet"]
+    output:
+        table = f"{OUT}/final_table.tsv",
+        drops = f"{OUT}/drop_log.tsv"
+    log:
+        f"{OUT}/logs/00_clean.log"
+    conda:
+        "environment.yml"
+    script:
+        "scripts/00_clean.py"
+
+rule filter_counts:
+    input:
+        counts = config["paths"]["counts"],
+        sheet  = f"{OUT}/final_table.tsv"
+    output:
+        f"{OUT}/filtered_counts.tsv"
+    log:
+        f"{OUT}/logs/01_filter.log"
+    conda:
+        "environment.yml"
+    script:
+        "scripts/01_filter.R"
+
+rule differential_expression:
+    input:
+        counts = f"{OUT}/filtered_counts.tsv",
+        sheet  = f"{OUT}/final_table.tsv"
+    output:
+        f"{OUT}/de_results.tsv"
+    log:
+        f"{OUT}/logs/02_de.log"
+    conda:
+        "environment.yml"
+    script:
+        "scripts/02_de.R"
+
+rule enrichment:
+    input:
+        f"{OUT}/de_results.tsv"
+    output:
+        f"{OUT}/enrichment_dotplot.pdf"
+    log:
+        f"{OUT}/logs/03_enrichment.log"
+    conda:
+        "environment.yml"
+    script:
+        "scripts/03_enrichment.R"
